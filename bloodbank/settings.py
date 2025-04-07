@@ -42,14 +42,22 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.security.SecurityMiddleware',  # Ensure this is first
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Must come before AuthenticationMiddleware
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # This should be after SessionMiddleware
+    'django.contrib.messages.middleware.MessageMiddleware',  # This should come after AuthenticationMiddleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',  # Optional, only if you're using caching
+    'django.middleware.cache.FetchFromCacheMiddleware',  # Optional, only if you're using caching
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.http.ConditionalGetMiddleware',
+    'django.contrib.staticfiles.middleware.StaticFilesMiddleware',  # Static files middleware (important for serving files)
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Optional: if using WhiteNoise for static file handling
 ]
+
 
 ROOT_URLCONF = 'bloodbank.urls'
 
@@ -131,16 +139,12 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this middleware for static file handling
-    # Other middlewares
-]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 
 # Email configuration
