@@ -2,8 +2,6 @@
 myvenv1/
 .env/
 
-# Ignore database file (optional)
-db.sqlite3
 
 # Ignore compiled files
 __pycache__/
