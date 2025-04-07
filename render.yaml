@@ -3,5 +3,5 @@ services:
     name: bloodbank
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn bloodbank.wsgi:application"
+    startCommand: "python manage.py migrate && gunicorn bloodbank.wsgi:application"
     region: us
