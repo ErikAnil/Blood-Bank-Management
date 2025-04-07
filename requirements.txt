@@ -164,4 +164,5 @@ pyobjc-framework-WebKit==11.0
 pyttsx3==2.98
 sqlparse==0.5.3
 typing_extensions==4.13.1
+wheel==0.45.1
 whitenoise==6.9.0
