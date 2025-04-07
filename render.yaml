@@ -1,7 +1,7 @@
 services:
   - type: web
-    name: myapp
+    name: bloodbank
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn myapp.wsgi:application"
+    startCommand: "gunicorn bloodbank.wsgi:application"
     region: us
