@@ -42,20 +42,20 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',  # Ensure this is first
-    'django.contrib.sessions.middleware.SessionMiddleware',  # Must come before AuthenticationMiddleware
-    'django.contrib.auth.middleware.AuthenticationMiddleware',  # This should be after SessionMiddleware
-    'django.contrib.messages.middleware.MessageMiddleware',  # This should come after AuthenticationMiddleware
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',  # Optional, only if you're using caching
-    'django.middleware.cache.FetchFromCacheMiddleware',  # Optional, only if you're using caching
+    'django.middleware.cache.UpdateCacheMiddleware', 
+    'django.middleware.cache.FetchFromCacheMiddleware', 
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
-    'django.contrib.staticfiles.middleware.StaticFilesMiddleware',  # Static files middleware (important for serving files)
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Optional: if using WhiteNoise for static file handling
+    'django.contrib.staticfiles.middleware.StaticFilesMiddleware',  # This should be removed
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 
