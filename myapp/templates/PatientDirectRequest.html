@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Patient Blood Request to Doner Page</title>
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Main CSS-->
+    <link href="{% static 'patientrequest/css/main.css' %}" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div class="page-wrapper bg-dark p-t-100 p-b-50">
+        <div class="wrapper wrapper--w900">
+            <div class="card card-6">
+                <div class="card-heading">
+                    <h2 class="title"> Request to Blood Bank</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                  {% csrf_token %}
+						<div class="form-row">
+                            <div class="name">Patient Name</div>
+                            <div class="value">
+              					<div class="input-group"> 
+									<input class="input--style-6" type="text" name="t3" value="{{pname}}" readonly="readonly">
+              					</div>
+                            </div>
+                        </div>
+						
+						<div class="form-row">
+                            <div class="name">Patient Phone</div>
+                            <div class="value">
+              					<div class="input-group"> 
+                					<input class="input--style-6" type="text" name="t4" value="{{ppho}}" readonly="readonly" >
+             					</div>
+                            </div>
+                        </div>
+						<div class="form-row">
+                            <div class="name">Blood Group</div>
+                            <div class="value">
+              					<div class="input-group">
+                					<select name="s1" id="s1" required>
+										<option value="">Select Blood Group</option>
+										{% for j in brec %}
+                                        <option value="{{j.bgroup}}">{{j.bgroup}}</option>
+										{% endfor %}
+									</select>
+              					</div>
+                            </div>
+                        </div>
+						
+						<div class="form-row">
+                            <div class="name">No of Bottles</div>
+                            <div class="value">
+                                <div class="input-group"> 
+                                    <!-- Replace the select dropdown with a number input field -->
+                                    <input class="input--style-6" type="number" name="s2" id="s2" min="1" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="name">Required Date</div>
+                            	<div class="value">
+              						<div class="input-group">
+                						<input class="input--style-6" type="date" name="t6" required >
+             					 	</div>
+                            	</div>
+                        </div>
+
+						 <div class="form-row">
+                            <div class="name">Message</div>
+                            <div class="value">
+            					<div class="input-group">
+              						<textarea class="textarea--style-6" name="t7" placeholder="Detail Description" required></textarea>
+            					</div>
+                        </div>
+			         <div class="card-footer">
+                          <button class="btn btn--radius-2 btn--blue-2" type="submit" >Send Request</button>
+						  <button class="btn btn--radius-2 btn--blue-2" type="reset"  formnovalidate>Cancel</button>
+                    </div>
+				 </form>
+				</div> 
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'patientrequest/vendor/jquery/jquery.min.js' %}"></script>
+
+
+    <!-- Main JS-->
+    <script src="{% static 'patientrequest/js/global.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#s1').change(function() {
+        var selectedValue = $(this).val();
+
+        $.ajax({
+            url: '/ajax/load-options/',
+            data: {
+                'selected_value': selectedValue
+            },
+            success: function(response) {
+                // Clear the options of the second select dropdown
+                $('#s2').empty();
+
+                // Populate the options of the second select dropdown
+                $('#s2').append($('<option>').text('select No of Bottle'));
+                $.each(response.options, function(index, option) {
+                    $('#s2').append($('<option>').text(option));
+                });
+            }
+        });
+    });
+});
+</script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

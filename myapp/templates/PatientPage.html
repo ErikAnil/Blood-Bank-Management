@@ -1,0 +1,223 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Web App Landing Page Website Tempalte | Smarteyeapps.com</title>
+    <link rel="shortcut icon" href="{% static 'assets/images/fav.png' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'assets/images/fav.jpg' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawsom-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/grid-gallery/css/grid-gallery.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}" />
+</head>
+
+<body>
+        <header class="continer-fluid ">
+            <div class="header-top">
+                <div class="container">
+                    <div class="row col-det">
+                        <div class="col-lg-6 d-none d-lg-block">
+                            <ul class="ulleft">
+                                <li>
+                                    
+                                    Patient Page 
+                                    <span>|</span></li>
+                                <li>
+                                   
+                                    Welcome <?php echo $_SESSION['name'];?></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <ul class="ulright">
+                              
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="menu-jk" class="header-bottom navbar-area" style="background-color: black;">
+                <div class="container">
+                    <div class="row nav-row">
+                       
+                        <div class="col-md-12 nav-col">
+                            <nav class="navbar navbar-expand-lg navbar-dark">
+
+                                
+        <button
+                                    class="navbar-toggler"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#navbarNav"
+                                    aria-controls="navbarNav"
+                                    aria-expanded="false"
+                                    aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> 
+        </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav">
+                                      
+										<li class="nav-item">
+                                            <a class="nav-link" href="/pvsts/"style="font-size: 20px; color: white;">View Status</a>
+                                        </li>
+                                         <li class="nav-item">
+                                            <a class="nav-link" href="/chp/"style="font-size: 20px; color: white;">Change Password</a>
+                                        </li>
+                                        
+										  </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/uvnot/"style="font-size: 20px; color: white;">Notifications</a>
+                                        </li>
+                                       <li class="nav-item">
+    <a class="nav-link" href="/h/" style="color: white; background-color: red; padding: 8px 16px; border-radius: 4px; text-decoration: none;">Logout</a>
+</li>
+
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section id="process" class="donation-care">
+            <div class="container">
+              <div class="row session-title">
+                  <h2>Active Donors </h2>
+                  
+              </div>
+               <div class="row">
+                   {% for j in drec %}
+                    <div class="col-md-3 col-sm-6 vd">
+                       <div class="bkjiu">
+                        <img src="{{j.photo.url}}" width="250" height="250"  alt="">
+                        <h4><b>ID : {{j.id}} </b></h4>
+                        <p>Name : {{j.fname}}</p>
+                        <p>Blood Group : {{j.bgroup}}</p>
+                        <p>Phone No : {{j.phone}}</p>
+                        <a  href="/pbk/{{j.id}}/"><button class="btn btn-sm btn-danger">Make a Request <i class="fas fa-arrow-right"></i></button></a>
+                       
+                        </div>
+                    </div>
+                    {% endfor %}
+                    </div>
+             </div>
+        </section>
+     
+      
+     
+    <div id="gallery" class="gallery container-fluid">
+        <div class="container">
+            <div class="row session-title">
+                <h2>Blood Bank Stock </h2>
+            </div>
+            <div class="row">
+                 <div class="col-md-3 col-sm-6 vd">
+                    <div class="bkjiu">
+                            
+                                <img src="{% static 'assets/images/gallery/g1.jpg' %}">
+								<p>(250 ml) No of Bottles : {{ap}}</p>
+								<a  href="/dbk/"> <button class="btn btn-sm btn-danger">Book Now <i class="fas fa-arrow-right"></i></button></a>
+                          
+					</div>
+				  </div>		
+  				  <div class="col-md-3 col-sm-6 vd">
+                       <div class="bkjiu">  
+						   
+                                <img src="{% static 'assets/images/gallery/g2.jpg' %}">
+                                <p>(250 ml) No of Bottles :{{an}}</p>
+								<a  href="/dbk/"> <button class="btn btn-sm btn-danger">Book Now <i class="fas fa-arrow-right"></i></button></a>
+					   </div>
+				   </div>		
+				    <div class="col-md-3 col-sm-6 vd">
+                    <div class="bkjiu">	
+                      
+                                <img src="{% static 'assets/images/gallery/g3.jpg' %}">
+                                <p>(250 ml) No of Bottles : {{bp}}</p>
+								<a  href="/dbk/"> <button class="btn btn-sm btn-danger">Book Now <i class="fas fa-arrow-right"></i></button></a>
+					 </div>
+				    </div>		
+					 <div class="col-md-3 col-sm-6 vd">
+                       <div class="bkjiu">		
+                                <img src="{% static 'assets/images/gallery/g4.jpg' %}">
+                                <p>(250 ml) No of Bottles : {{bn}}</p>
+								<a  href="/dbk/"> <button class="btn btn-sm btn-danger">Book Now <i class="fas fa-arrow-right"></i></button></a>
+						</div>
+				      </div>		
+					 <div class="col-md-3 col-sm-6 vd">
+                        <div class="bkjiu">		
+                        
+                                <img src="{% static 'assets/images/gallery/g5.jpg' %}">
+                                <p>(250 ml) No of Bottles :{{abp}}</p>
+								<a  href="/dbk/"> <button class="btn btn-sm btn-danger">Book Now <i class="fas fa-arrow-right"></i></button></a>
+						</div>
+				     </div>		
+             		
+					 <div class="col-md-3 col-sm-6 vd">
+                     <div class="bkjiu">		
+                               <img src="{% static 'assets/images/gallery/g6.jpg' %}">
+                                <p>(250 ml) No of Bottles : {{abn}}</p>
+								<a  href="/dbk/"> <button class="btn btn-sm btn-danger">Book Now <i class="fas fa-arrow-right"></i></button></a>
+					</div>
+				    </div>		
+             		
+					<div class="col-md-3 col-sm-6 vd">
+                    <div class="bkjiu">		
+                            
+                                <img src="{% static 'assets/images/gallery/g7.jpg' %}">
+                                <p>(250 ml) No of Bottles : {{op}}</p>
+								<a  href="/dbk/"> <button class="btn btn-sm btn-danger">Book Now <i class="fas fa-arrow-right"></i></button></a>
+					 </div>
+				     </div>		
+					<div class="col-md-3 col-sm-6 vd">
+                    <div class="bkjiu">		
+                                <img src="{% static 'assets/images/gallery/g8.jpg' %}">
+								<p>(250 ml) No of Bottles :{{on}}</p>
+								<a  href="/dbk/"> <button class="btn btn-sm btn-danger">Book Now <i class="fas fa-arrow-right"></i></button></a>
+					</div>
+				   </div>		
+             </div>
+        </div>
+    </div>
+    
+    
+    
+  
+     
+    
+     
+     
+        
+     
+
+   
+       <!--*************** Footer  Starts Here *************** -->
+    <footer id="contact" class="container-fluid">
+       
+                
+                  
+
+               
+            <div class="footer-copy" style =padding-top:60px;>
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <p>Copyright © Erik Anil  | All right reserved.</p>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+</body>
+
+    <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/grid-gallery/js/grid-gallery.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js' %}"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+</html>

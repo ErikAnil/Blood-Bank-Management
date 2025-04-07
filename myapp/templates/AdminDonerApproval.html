@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="{% static 'donerapproval/css/style.css' %}">
+
+	</head>
+
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Newly Requsted Donors</h2>
+				</div>
+			</div>
+			<div class="row">
+
+    <div class="col-md-12">
+      <div class="table-wrap">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Phone</th>
+              <th>Blood Group</th>
+              <th>Allergy</th>
+              <th>Last Donation Date</th>
+
+              <th colspan="2" align="center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+           {% for j in drec %}
+            <tr>
+              <td><img src="{{j.photo.url}}" width="100" height="100"/></td>
+              <td>{{j.fname}}</td>
+              <td>{{j.gender}}</td>
+              <td>{{j.phone}}</td>
+              <td>{{j.bgroup}}</td>
+              <td>{{j.allergy}}</td>
+              <td>{{j.ldate}}</td>
+              <td><a  href="/aad/{{j.id}}/"><b>Approve</a></td>
+              <td><a  href="/amr/{{j.id}}/"><b>Reject</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+			</div>
+			<center><a  href="/ap/"><b>Back</a></center>
+		</div>
+	</section>
+
+	<script src="{% static 'donerapproval/js/jquery.min.js' %}"></script>
+  <script src="{% static 'donerapproval/js/popper.js' %}"></script>
+  <script src="{% static 'donerapproval/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'donerapproval/js/main.js' %}"></script>
+
+	</body>
+</html>
+
+</html>

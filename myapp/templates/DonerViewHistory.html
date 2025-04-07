@@ -1,0 +1,82 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+  	<title>Table 09</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="{% static 'donerapproval/css/style.css' %}">
+
+	</head>
+
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section">Donation History</h2>
+				</div>
+			</div>
+			<div class="row">
+				
+    <div class="col-md-12"> 
+      <div class="table-wrap"> 
+        <table class="table table-striped">
+          <thead>
+            <tr> 
+              <th>No</th>
+              <th>Patient</th>
+              <th>Phone</th>
+              <th>Blood_Group</th>
+              <th>Required_Date</th>
+              <th>Details</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for j in drec %}
+            <tr> 
+                <td>{{ j.reqno }}</td>
+                <td>{{ j.pname }}</td>
+                <td>{{ j.pphone }}</td>
+                <td>{{ j.bg }}</td>
+                <td>{{ j.reqdate }}</td>
+                <td>{{ j.msg }}</td>
+                <td>{{ j.status }}</td>
+            </tr>
+            {% endfor %}
+            <!-- Display details of the deleted row if it exists -->
+            {% if deleted_row %}
+            <tr>
+                <td>{{ deleted_row.reqno }}</td>
+                <td>{{ deleted_row.pname }}</td>
+                <td>{{ deleted_row.pphone }}</td>
+                <td>{{ deleted_row.bg }}</td>
+                <td>{{ deleted_row.reqdate }}</td>
+                <td>{{ deleted_row.msg }}</td>
+                <td>{{ deleted_row.status }}</td>
+            </tr>
+            {% endif %}
+        </tbody>
+        
+        </table>
+      </div>
+    </div>
+			</div>
+			<center><a  href="/dp/"><b>Back</a></center>
+		</div>
+	</section>
+
+  <script src="{% static 'donerapproval/js/jquery.min.js' %}"></script>
+  <script src="{% static 'donerapproval/js/popper.js' %}"></script>
+  <script src="{% static 'donerapproval/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'donerapproval/js/main.js' %}"></script>
+
+	</body>
+</html>
+

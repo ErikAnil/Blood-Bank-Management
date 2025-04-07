@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Registration Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #ddd;
+            margin: 0;
+            padding: 0;
+            position: relative; /* Ensure body's position is relative for absolute positioning */
+        }
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 100px); /* Adjust the value (100px) based on your browser's header height */
+            position: relative; /* Ensure wrapper's position is relative for absolute positioning */
+			
+        }
+        .inner {
+            width: 90%;
+            max-width: 500px;
+            background-color: #333;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            position: relative; /* Ensure inner's position is relative for absolute positioning */
+        }
+        h2, h3 {
+            text-align: center;
+            color: #fff;
+        }
+        .form-item {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ddd;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #888;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #444;
+            color: #ddd;
+        }
+        input[type="checkbox"] {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* New CSS for image */
+        .surrounding-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image covers the entire viewport */
+            z-index: -1;
+            opacity: 0.5; /* Adjust the opacity as needed */
+        }
+
+   
+    </style>
+</head>
+<body>
+    <!-- Image inserted into surroundings -->
+    <img src="{% static 'donerreg/images/bldbg.jpg' %}" alt="Surrounding Image" class="surrounding-image">
+
+    <div class="wrapper" style="padding-top: 470px; ">
+        <div class="inner">
+            <a href="/h/" style="padding-left: 450px;"><button type="button">Home</button></a>
+            <form action="" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+                {% csrf_token %}
+                <h2>Donor Registration Form</h2>
+                <div class="header">
+                    <h5>Already a registered Donor?</h5>
+                    <a href="/log/" class="login-link" style="padding-right: 280px; color: #4caf50;">Login</a>
+                </div>
+                <div class="form-item">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="t1" required>
+                </div>
+                <div class="form-item">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="t2" required>
+                </div>
+                <div class="form-item">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="t3" required>
+                </div>
+                <div class="form-item">
+                    <label for="district">District</label>
+                    <select id="district" name="t4" required>
+                        <option value="">Select District</option>
+                        <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                        <option value="Kollam">Kollam</option>
+						<option value="Pathanamthitta">Pathanamthitta</option>
+						<option value="Alappuzha">Alappuzha</option>
+						<option value="Kottayam">Kottayam</option>
+						<option value="Idukki">Idukki</option>
+						<option value="Ernakulam">Ernakulam</option>
+						<option value="Thrissur">Thrissur</option>
+						<option value="Palakkad">Palakkad</option>
+						<option value="Malappuram">Malappuram</option>
+						<option value="Kozhikode">Kozhikode</option>
+						<option value="Wayanad">Wayanad</option>
+						<option value="Kannur">Kannur</option>
+						<option value="Kasargod">Kasargod</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="t5" required>
+                </div>
+                <div class="form-item">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="t6" required>
+                </div>
+                <div class="form-item">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="t7" required>
+                </div>
+                <div class="form-item">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="t8" required>
+                </div>
+                <div class="form-item">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="t9" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label for="blood-group">Blood Group</label>
+                    <select id="blood-group" name="t10" required>
+                        <option value="">Select Blood Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+						<option value="B+">B+</option>
+						<option value="B-">B-</option>
+						<option value="AB+">AB+</option>
+						<option value="AB-">AB-</option>
+						<option value="O+">O+</option>
+						<option value="O-">O-</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label for="last-donation-date">Last Donation Date</label>
+                    <input type="date" id="last-donation-date" name="t11" required>
+                </div>
+                <div class="form-item">
+                    <label>Any Allergies</label>
+                    <input type="radio" id="allergies-yes" name="t12" value="Yes">
+                    Yes
+                    <input type="radio" id="allergies-no" name="t12" value="No" checked>
+                    No
+                </div>
+
+                <div class="form-item">
+                    <label for="disease">Disease If Any</label>
+                    <input type="text" id="disease" name="t13" >
+                </div>
+                <div class="form-item">
+                    <label for="photo">Upload Photo</label>
+                    <input type="file" id="photo" name="file">
+                </div>
+                <div class="form-item">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="t14" required>
+                </div>
+                <div class="form-item">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="t15" required>
+                </div>
+                
+                <button type="submit" name="submit">Register Now</button>
+				
+            
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function validateForm() {
+                var phoneNumberInput = document.getElementById("phone").value;
+                if (phoneNumberInput.length !== 10 || isNaN(phoneNumberInput)) {
+                    alert("Please enter a valid 10-digit phone number.");
+                    return false; // Prevent form submission
+                }
+                return true; // Allow form submission
+            }
+
+            // Add event listener to limit the input length
+            var phoneInput = document.getElementById("phone");
+            phoneInput.addEventListener("input", function(event) {
+                if (phoneInput.value.length > 10) {
+                    phoneInput.value = phoneInput.value.slice(0, 10); // Truncate input to 10 characters
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Registration Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #ddd;
+            margin: 0;
+            padding: 0;
+            position: relative; /* Ensure body's position is relative for absolute positioning */
+        }
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 100px); /* Adjust the value (100px) based on your browser's header height */
+            position: relative; /* Ensure wrapper's position is relative for absolute positioning */
+			
+        }
+        .inner {
+            width: 90%;
+            max-width: 500px;
+            background-color: #333;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            position: relative; /* Ensure inner's position is relative for absolute positioning */
+        }
+        h2, h3 {
+            text-align: center;
+            color: #fff;
+        }
+        .form-item {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #ddd;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #888;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #444;
+            color: #ddd;
+        }
+        input[type="checkbox"] {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* New CSS for image */
+        .surrounding-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image covers the entire viewport */
+            z-index: -1;
+            opacity: 0.5; /* Adjust the opacity as needed */
+        }
+
+   
+    </style>
+</head>
+<body>
+    <script>
+        function validateForm() {
+            var phoneNumberInput = document.getElementById("phone").value;
+            if (phoneNumberInput.length !== 10 || isNaN(phoneNumberInput)) {
+                alert("Please enter a valid 10-digit phone number.");
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+    </script>
+    <!-- Image inserted into surroundings -->
+    <img src="{% static 'donerreg/images/bldbg.jpg' %}" alt="Surrounding Image" class="surrounding-image">
+
+    <div class="wrapper" style="padding-top: 50px; ">
+        <div class="inner">
+            <a href="/h/" style="padding-left: 450px;"><button type="button">Home</button></a>
+            <form action="{% url 'patient_registration' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2>Patient Registration Form</h2>
+                <div class="header">
+                    <h5>Already a registered Patient?</h5>
+                    <a href="/log/" class="login-link" style="padding-right: 270px; color: #4caf50;">Login</a>
+                </div>
+                <div class="form-item">
+                    <label for="first-name">First Name</label>
+                    <input type="text" id="first-name" name="fn" required>
+                </div>
+                <div class="form-item">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" id="last-name" name="ln" required>
+                </div>
+                <div class="form-item">
+                    <label for="last-name">City</label>
+                    <input type="text" id="city" name="ct" required>
+                </div>
+				<div class="form-item">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="ph" required minlength="10" maxlength="10">
+                </div>
+                
+                
+				<div class="form-item">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="em" required>
+                </div>
+				<div class="form-item">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="un" required>
+					{% if error_message %}
+                <span style="color: red;">{{ error_message }}</span>
+                {% endif %}
+                </div>
+				<div class="form-item">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="pw" required>
+                </div>
+               
+                
+                
+                <button type="submit" name="submit">Register Now</button>
+				
+            
+            </form>
+        </div>
+    </div>
+</body>
+</html>

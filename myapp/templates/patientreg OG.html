@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+ 		<title>RegistrationForm_v2 by Colorlib</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="{% static 'patient/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{% static 'patient/css/style.css' %}">
+		
+	</head>
+
+	<body>
+		<div class="container-login100">
+		<div class="wrapper" style="background-image: url({% static 'patient/images/2 - Copy.jpg' %});">
+			<div class="inner">
+				<form action="{% url 'patient_registration' %}" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<input type="hidden" name="em" value="{{ email }}">
+				{% csrf_token %}
+				
+					<h3>Patient Registration Form</h3>
+					<a href="/h/" style="position: fixed; top: 0; right: 0; margin: 60px; padding-right: 300px;"><button type="button">Home</button></a>
+
+
+					<div class="form-group">
+						<div class="form-wrapper">
+							<b><label for="">First Name</label></b>
+							<input type="text" class="form-control" name="fn" required>
+						</div>
+						<div class="form-wrapper">
+							<b><label for="">Last Name</label></b>
+							<input type="text" class="form-control" name="ln" required>
+						</div>
+					</div>
+					<div class="form-wrapper">
+						<b><label for="">Phone No</label></b>
+						<input type="text" class="form-control" name="ph" required >
+					</div>
+					<div class="form-wrapper">
+						<b><label for="">Email</label></b>
+						<input type="email" class="form-control" name="em" required>
+					</div>
+					<b><div class="form-wrapper">User Name</label></b>
+						<input type="text" class="form-control" name="un" required>
+					</div>
+					<div class="form-wrapper">
+						<b><label for="">Password</label></b>
+						<input type="password" class="form-control" name="pw" required>
+					</div>
+					
+					<button type="submit" name="submit">Register Now</button>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>
+

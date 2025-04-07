@@ -1,0 +1,91 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'notific/fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'notific/css/owl.carousel.min.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'notific/css/bootstrap.min.css' %}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'notific/css/style.css' %}">
+
+    <title>View Notifications</title>
+  </head>
+
+  <body>
+  
+
+  <div class="content">
+    
+    <div class="container">
+      <h2 class="mb-5">Admin Notifications</h2>
+
+      <div class="table-responsive">
+
+        <table class="table custom-table">
+          <thead>
+            <tr>
+              <th scope="col">
+                <label class="control control--checkbox">
+                  <input type="checkbox" class="js-check-all"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+              <th scope="col">Venue</th>
+              <th scope="col">Program</th>
+              <th scope="col">Details</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+		      {% for j in nrec %}
+
+            <tr>
+              <th scope="row">
+                <label class="control control--checkbox">
+                  <input type="checkbox"/>
+                  <div class="control__indicator"></div>
+                </label>
+              </th>
+              <td>
+                {{j.pdate}}
+              </td>
+              <td>{{j.ptime}}</td>
+              <td>
+                {{j.venue}}
+                <small class="d-block">Far far away, behind the word mountains</small>
+              </td>
+              <td>{{j.purpose}}</td>
+              <td>{{j.note}}</td>
+              <td><a href="/delnot/{{j.id}}/">Delete</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+      </div>
+
+
+    </div>
+
+  </div>
+    
+    </div>
+			<center><a  href="/pp/"><b>Back</a></center>
+		</div>
+
+    <script src="{% static 'notific/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'notific/js/popper.min.js' %}"></script>
+    <script src="{% static 'notific/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'notific/js/main.js' %}"></script>
+  </body>
+</html>

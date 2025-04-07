@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<title>Table 06</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="{% static 'transfer/css/style.css' %}">
+
+	</head>
+
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row">
+
+    <div class="col-md-12">
+      <h3 class="h5 mb-4 text-center">Admin Blood Transfer Page</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead class="thead-primary">
+            <tr>
+              <th>No</th>
+              <th>Patient_Name</th>
+              <th>Phone</th>
+              <th>Blood_Group</th>
+              <th>Details</th>
+              <th>No of Bottles</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for j in brec %}
+            <tr class="alert" role="alert">
+              <td>{{j.reqno}}</td>
+              <td>{{j.pname}}</td>
+              <td>{{j.phone}}</td>
+              <td>{{j.bg}}</td>
+              <td>{{j.details}}</td>
+              <td>{{j.nofb}}</td>
+              <td>
+            <a href="/adtrs/{{j.id}}/"><b>Approve & Transfer</a>
+            </td>
+              <td>
+            <a href="/reject/{{j.id}}/"><b>Reject</a> <!-- Add a link for rejecting -->
+            </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+			</div>
+		</div>
+	</section>
+           </div>
+			<center><a  href="/ap/"><b>Back</a></center>
+		 </div>
+	<script src="{% static 'transfer/js/jquery.min.js' %}"></script>
+  <script src="{% static 'transfer/js/popper.js' %}"></script>
+  <script src="{% static 'transfer/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'transfer/js/main.js' %}"></script>
+  <script>
+    function rejectRequest(id) {
+        // Send an AJAX request to reject the request
+        $.ajax({
+            url: '/reject/',
+            type: 'POST',
+            data: {
+                id: id,
+                csrfmiddlewaretoken: '{{ csrf_token }}' // Include CSRF token for security
+            },
+            success: function(response) {
+                // Remove the row from the table if rejection is successful
+                if (response.success) {
+                    $('#row_' + id).remove();
+                }
+            }
+        });
+    }
+    </script>
+	</body>
+</html>
+
