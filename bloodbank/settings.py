@@ -132,9 +132,23 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add this middleware for static file handling
-    # Other middlewares
+    'django.middleware.security.SecurityMiddleware',  # Ensure this is first
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Must come before AuthenticationMiddleware
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # This should be after SessionMiddleware
+    'django.contrib.messages.middleware.MessageMiddleware',  # This should come after AuthenticationMiddleware
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.transaction.TransactionMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.http.ConditionalGetMiddleware',
+    'django.contrib.staticfiles.middleware.StaticFilesMiddleware',  # Static files middleware (important for serving files)
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Optional: if using WhiteNoise for static file handling
 ]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
