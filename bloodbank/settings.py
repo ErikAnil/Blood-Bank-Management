@@ -54,7 +54,6 @@ MIDDLEWARE = [
     'django.middleware.transaction.TransactionMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
-    'django.contrib.staticfiles.middleware.StaticFilesMiddleware',  # This should be removed
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
