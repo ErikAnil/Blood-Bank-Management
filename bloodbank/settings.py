@@ -138,9 +138,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',  # This should come after AuthenticationMiddleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',  # Optional, only if you're using caching
+    'django.middleware.cache.FetchFromCacheMiddleware',  # Optional, only if you're using caching
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
     'django.middleware.gzip.GZipMiddleware',
@@ -148,6 +147,7 @@ MIDDLEWARE = [
     'django.contrib.staticfiles.middleware.StaticFilesMiddleware',  # Static files middleware (important for serving files)
     'whitenoise.middleware.WhiteNoiseMiddleware',  # Optional: if using WhiteNoise for static file handling
 ]
+
 
 
 # Default primary key field type
