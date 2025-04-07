@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: myapp
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn myapp.wsgi:application"
+    region: us
