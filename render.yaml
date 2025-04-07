@@ -2,6 +2,6 @@ services:
   - type: web
     name: bloodbank
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "python manage.py migrate && gunicorn bloodbank.wsgi:application"
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "gunicorn bloodbank.wsgi:application"
     region: us
