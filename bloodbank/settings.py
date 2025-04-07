@@ -30,7 +30,7 @@ ALLOWED_HOSTS = ['blood-bank-management-aefj.onrender.com', 'localhost', '127.0.
 
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://blood-bank-management-aefj.onrender.com",  # use your actual Render URL
+    "https://yourapp.onrender.com",
 ]
 # Application definition
 
@@ -141,8 +141,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = False  # Allow frontend JavaScript to access it if needed
+CSRF_COOKIE_SAMESITE = 'Lax'  # Or 'None' if cross-origin (use with Secure=True)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
