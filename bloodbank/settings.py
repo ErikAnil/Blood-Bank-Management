@@ -29,6 +29,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['blood-bank-management-aefj.onrender.com', 'localhost', '127.0.0.1']
 
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://blood-bank-management-aefj.onrender.com",  # use your actual Render URL
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -138,6 +141,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
