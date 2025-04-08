@@ -8,20 +8,24 @@ class doner(models.Model):
     fname = models.CharField(max_length=100)
     lname = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
-    dist = models.CharField(max_length=100)
+    dist = models.CharField(max_length=100)  # Changed from 'district' to 'dist'
     city = models.CharField(max_length=100)
     phone = models.CharField(max_length=20)
-    email = models.EmailField(max_length=254)
+    email = models.EmailField(max_length=254)  # Changed to EmailField
     age = models.IntegerField()
     gender = models.CharField(max_length=20)
     bgroup = models.CharField(max_length=20)
     ldate = models.DateField()
-    allergy = models.CharField(max_length=50, default='Nil')
-    photo = models.ImageField(upload_to='images/')
-    uname = models.CharField(max_length=100)
-    pword = models.CharField(max_length=100)
+    allergy = models.CharField(max_length=50, default='No')
+    disease = models.CharField(max_length=100, blank=True, null=True)
+    photo = models.ImageField(upload_to='donor_photos/')
+    uname = models.CharField(max_length=100, unique=True)
+    pword = models.CharField(max_length=128)  # Increased length for hashed passwords
     rights = models.CharField(max_length=20, default='New Doner')
     status = models.CharField(max_length=25, default='Active')
+
+    def __str__(self):
+        return f"{self.fname} {self.lname}"
 
 # ----------------------
 # Patient model

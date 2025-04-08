@@ -65,16 +65,22 @@ def index(request):
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import doner  # Adjust model name if different
+from django.contrib.auth.hashers import make_password
+from django.core.mail import send_mail
+from django.conf import settings
+from .models import doner
+from django.db import IntegrityError
+import os
 from datetime import datetime
 
 def donerreg(request):
     if request.method == 'POST':
         try:
+            # Collect form data
             fname = request.POST.get('t1')
             lname = request.POST.get('t2')
             address = request.POST.get('t3')
-            dist = request.POST.get('t4')
+            dist = request.POST.get('t4')  # Changed to match model field name
             city = request.POST.get('t5')
             phone = request.POST.get('t6')
             email = request.POST.get('t7')
@@ -82,19 +88,21 @@ def donerreg(request):
             gender = request.POST.get('t9')
             bgroup = request.POST.get('t10')
             ldate = request.POST.get('t11')
-            allergy = request.POST.get('t12')
-            disease = request.POST.get('t13')
+            allergy = request.POST.get('t12', 'No')  # Default to 'No'
+            disease = request.POST.get('t13', '')  # Optional field
             username = request.POST.get('t14')
             password = request.POST.get('t15')
+            photo = request.FILES.get('file')
 
-            # Handle uploaded photo file (optional)
-            photo = request.FILES.get('file')  # Won't raise KeyError
+            # Basic validation
+            if not all([fname, lname, email, phone, photo]):
+                messages.error(request, "Please fill all required fields")
+                return redirect('donerreg')
 
-            if not photo:
-                messages.error(request, "Photo upload is required.")
-                return redirect('donerreg')  # Replace with actual template name
+            # Hash password
+            hashed_password = make_password(password)
 
-            # Create Donor object and save
+            # Create donor
             donor = doner(
                 fname=fname,
                 lname=lname,
@@ -110,20 +118,37 @@ def donerreg(request):
                 allergy=allergy,
                 disease=disease,
                 photo=photo,
-                username=username,
-                password=password  # Consider hashing this if you're not using Django's auth system
+                uname=username,
+                pword=hashed_password,
+                rights='New Doner',
+                status='Active'
             )
             donor.save()
 
-            messages.success(request, "Registration successful! Please wait for admin approval.")
-            return redirect('donerreg')  # Or redirect to login page
+            # Send email
+            try:
+                send_mail(
+                    'Donor Registration Successful',
+                    f'Dear {fname},\n\nThank you for registering as a blood donor. '
+                    'Your account is pending admin approval.\n\n'
+                    'Best regards,\nBlood Bank Team',
+                    settings.DEFAULT_FROM_EMAIL,
+                    [email],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                print(f"Email sending failed: {e}")
 
-        except Exception as e:
-            print("Error in donor registration:", str(e))  # For debugging
-            messages.error(request, "Something went wrong. Please try again.")
+            messages.success(request, "Registration successful! Check your email for confirmation.")
             return redirect('donerreg')
-    
-    return render(request, 'onlinedonerreg.html')  # Adjust template name
+
+        except IntegrityError:
+            messages.error(request, "Username already exists. Please choose another.")
+        except Exception as e:
+            messages.error(request, f"Registration failed: {str(e)}")
+            print(f"Error: {str(e)}")
+
+    return render(request, "onlinedonerreg.html")
 
 def patient_registration(request):
     error_message = ''  # Initialize error_message
