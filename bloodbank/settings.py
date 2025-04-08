@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.http.ConditionalGetMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # This should be listed once
+    'whitenoise.middleware.WhiteNoiseMiddleware', # This should be listed once
 ]
 
 
