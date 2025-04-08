@@ -62,51 +62,6 @@ def index(request):
                   {"drec": drec, "ap": ap, "an": an, "bp": bp, "bn": bn, "abp": abp, "abn": abn, "op": op, "on": on})
 
 
-#def donerreg(request):
-    cdate = date.today()
-    if request.method == "POST":
-        fname = request.POST.get('t1')
-        lname = request.POST.get('t2')
-        address = request.POST.get('t3')
-        dist = request.POST.get('t4')
-        city = request.POST.get('t5')
-        phone = request.POST.get('t6')
-        email = request.POST.get('t7')
-        age = request.POST.get('t8')
-        gender = request.POST.get('t9')
-        bgroup = request.POST.get('t10')
-        ldate = request.POST.get('t11')
-        allergy = request.POST.get('t12')
-        photo = request.FILES['file']
-        uname = request.POST.get('t14')
-        pword = request.POST.get('t15')
-        st = 'Active'
-        if len(ldate) == 0:
-            ldate = date.today() - timedelta(180)
-        else:
-            date_format = "%Y-%m-%d"
-            a = datetime.strptime(str(ldate), date_format)
-            b = datetime.strptime(str(cdate), date_format)
-            delta = b - a
-            diff = int(delta.days)
-            if diff > 180:
-                st = 'Active'
-            else:
-                st = 'Inactive'
-        
-        da = doner(fname=fname, lname=lname, address=address, dist=dist, city=city, phone=phone, email=email,
-                   age=age, gender=gender, bgroup=bgroup, ldate=ldate, allergy=allergy, photo=photo, uname=uname,
-                   pword=pword, status=st)
-        da.save()
-        
-        # Assign registered_fname after saving the donor details
-        sregistered_fname = fname
-        
-        send_registration_email(email, sregistered_fname, 'donor')
-        
-        return redirect("/h/")
-    return render(request, "onlinedonerreg.html")
-
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -140,7 +95,7 @@ def donerreg(request):
                 return redirect('donerreg')  # Replace with actual template name
 
             # Create Donor object and save
-            donor = Donor(
+            donor = doner(
                 fname=fname,
                 lname=lname,
                 address=address,
@@ -168,7 +123,7 @@ def donerreg(request):
             messages.error(request, "Something went wrong. Please try again.")
             return redirect('donerreg')
     
-    return render(request, 'donerreg.html')  # Adjust template name
+    return render(request, 'onlinedonerreg.html')  # Adjust template name
 
 def patient_registration(request):
     error_message = ''  # Initialize error_message
