@@ -23,7 +23,7 @@ status=models.CharField(max_length=25,default='Active')
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import doner  # your model name
+
 from datetime import datetime
 
 def donerreg(request):
