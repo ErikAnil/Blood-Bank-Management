@@ -74,7 +74,7 @@ def donerreg(request):
             fname = request.POST.get('t1')
             lname = request.POST.get('t2')
             address = request.POST.get('t3')
-            district = request.POST.get('t4')
+            dist = request.POST.get('t4')
             city = request.POST.get('t5')
             phone = request.POST.get('t6')
             email = request.POST.get('t7')
@@ -99,7 +99,7 @@ def donerreg(request):
                 fname=fname,
                 lname=lname,
                 address=address,
-                district=district,
+                dist=dist,
                 city=city,
                 phone=phone,
                 email=email,
