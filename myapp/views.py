@@ -62,7 +62,7 @@ def index(request):
                   {"drec": drec, "ap": ap, "an": an, "bp": bp, "bn": bn, "abp": abp, "abn": abn, "op": op, "on": on})
 
 
-def donerreg(request):
+#def donerreg(request):
     cdate = date.today()
     if request.method == "POST":
         fname = request.POST.get('t1')
@@ -107,6 +107,68 @@ def donerreg(request):
         return redirect("/h/")
     return render(request, "onlinedonerreg.html")
 
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import Donor  # Adjust model name if different
+from datetime import datetime
+
+def donerreg(request):
+    if request.method == 'POST':
+        try:
+            fname = request.POST.get('t1')
+            lname = request.POST.get('t2')
+            address = request.POST.get('t3')
+            district = request.POST.get('t4')
+            city = request.POST.get('t5')
+            phone = request.POST.get('t6')
+            email = request.POST.get('t7')
+            age = request.POST.get('t8')
+            gender = request.POST.get('t9')
+            bgroup = request.POST.get('t10')
+            ldate = request.POST.get('t11')
+            allergy = request.POST.get('t12')
+            disease = request.POST.get('t13')
+            username = request.POST.get('t14')
+            password = request.POST.get('t15')
+
+            # Handle uploaded photo file (optional)
+            photo = request.FILES.get('file')  # Won't raise KeyError
+
+            if not photo:
+                messages.error(request, "Photo upload is required.")
+                return redirect('donerreg')  # Replace with actual template name
+
+            # Create Donor object and save
+            donor = Donor(
+                fname=fname,
+                lname=lname,
+                address=address,
+                district=district,
+                city=city,
+                phone=phone,
+                email=email,
+                age=age,
+                gender=gender,
+                bgroup=bgroup,
+                ldate=ldate,
+                allergy=allergy,
+                disease=disease,
+                photo=photo,
+                username=username,
+                password=password  # Consider hashing this if you're not using Django's auth system
+            )
+            donor.save()
+
+            messages.success(request, "Registration successful! Please wait for admin approval.")
+            return redirect('donerreg')  # Or redirect to login page
+
+        except Exception as e:
+            print("Error in donor registration:", str(e))  # For debugging
+            messages.error(request, "Something went wrong. Please try again.")
+            return redirect('donerreg')
+    
+    return render(request, 'donerreg.html')  # Adjust template name
 
 def patient_registration(request):
     error_message = ''  # Initialize error_message
