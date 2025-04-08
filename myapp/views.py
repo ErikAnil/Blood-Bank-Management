@@ -110,7 +110,7 @@ def index(request):
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Donor  # Adjust model name if different
+from .models import doner  # Adjust model name if different
 from datetime import datetime
 
 def donerreg(request):
